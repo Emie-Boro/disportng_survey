@@ -1,11 +1,17 @@
-let currentStep = 1;
-function showStep(step) {
-    document.getElementById(`step${step}`).classList.remove('form-step')
-}
+const express = require('express')
+const path = require('path')
+const exphbs = require('express-handlebars')
 
-function next() {
-    if(currentStep < 4) {
-        currentStep++;
-        showStep(currentStep)
-    }
-}
+const app = express()
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.engine('.hbs', exphbs.engine({ extname:'.hbs' }))
+app.set('view engine', '.hbs')
+app.set('views', path.join(__dirname, 'views'))
+
+app.get('/', (req, res)=>{
+    res.render('index', {title: 'Disport NG', layout:false})
+})
+
+app.listen(8080, console.log('Server running...'))
