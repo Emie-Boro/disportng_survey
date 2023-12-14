@@ -42,7 +42,7 @@ app.get('/', (req, res)=>{
   res.render('index', {title: 'Disport NG', })
 })
 
-app.post('/api/new-survey', async (req, res) => {
+app.post('/', async (req, res) => {
   {
     try{
       const { name, email, question1, question2, question3, question4, question6, question7, question8,} = req.body
@@ -58,8 +58,8 @@ app.post('/api/new-survey', async (req, res) => {
       //     console.log('Email appended to file');
       //   }
       // })
-
-      res.status(201).json({ message: 'User data saved successfully'})
+      res.render('success')
+      // res.status(201).json({ message: 'User data saved successfully'})
     } catch (error) {
       res.status(500).json({ error: 'Error saving survey'})
     }
